@@ -21,6 +21,7 @@ public class Node {
         this.value = value;
 
     }
+    //tal vez la key no deberia ser int sino otra clase especial
     
     
 }
