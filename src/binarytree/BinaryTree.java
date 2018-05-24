@@ -37,8 +37,35 @@ public class BinaryTree {
         return x;
     }
     
+    public Object get(int key){
+        //regresa el objeto asociado a una key
+        //en caso de no encontrar nada lanza una excepcion
+        return get(this.root,key);
+    }
+    
+    private Object get(Node x,int key){
+        
+        Object aux =null;
+        if(x==null)
+            throw new IllegalArgumentException("key not found");
+        
+        if(key==x.key)
+            return x.value;
+        
+        if(key < x.key){
+            aux=get(x.leftNode,key);
+        }else if(key > x.key){
+            aux=get(x.rightNode,key);
+        }
+        
+        return aux;
+
+    }
+    
     public void inOrder(){
+        //imprime las keys del arbol en inOrder
         inOrder(this.root);
+        System.out.println("\n");
     }
     
     private void inOrder(Node x){
@@ -47,13 +74,15 @@ public class BinaryTree {
             //return;
         }else{
         inOrder(x.leftNode);
-        System.out.println(x.key);
+        System.out.print(x.key+", ");
         inOrder(x.rightNode);
         }
     }
 
     public void preOrder(){
+        //imprime las keys del arbol en preOrder
         preOrder(this.root);
+        System.out.println("\n");
     }
     
     private void preOrder(Node x){
@@ -61,7 +90,7 @@ public class BinaryTree {
         if(x==null){
         
         }else{
-            System.out.println(x.key);
+            System.out.print(x.key+", ");
             preOrder(x.leftNode);
             preOrder(x.rightNode);
         }
@@ -69,7 +98,9 @@ public class BinaryTree {
     }
     
     public void postOrder(){
+        //imprime las keys del arbol en postOrder
         postOrder(this.root);
+        System.out.println("\n");
     }
     
     private void postOrder(Node x){
@@ -78,24 +109,26 @@ public class BinaryTree {
         }else{
             postOrder(x.leftNode);
             postOrder(x.rightNode);
-            System.out.println(x.key);
+            System.out.print(x.key+", ");
         }
     }
     
     public static void main(String[] args) {
         
         BinaryTree test = new BinaryTree();
+        Object aux;
         
         test.put(5, "hola");
         test.put(3, "adios");
         test.put(1, "adios");
-        test.put(8, "adios");
+        test.put(8, "heheheh");
         test.put(6, "adios");
-        test.put(10, "adios");
+        test.put(10, "test");
         
-        test.postOrder();
-
-        //System.out.println("codigo");
+        test.inOrder();
+        
+        aux = test.get(10);
+        System.out.println("objecto: "+(String)aux);
     }
     
 }
