@@ -37,6 +37,40 @@ public class BinaryTree {
         return x;
     }
     
+    public void deleteMin(){
+        this.root = deleteMin(this.root);
+    }
+    
+    private Node deleteMin(Node x){
+        
+        Node aux = x.leftNode;
+    
+        if(aux.leftNode ==  null){
+            x.leftNode = null;
+        }else{
+            deleteMin(x.leftNode);
+        }
+        
+        return x;
+    }
+    
+    public void deleteMax(){
+        this.root = deleteMax(this.root);
+    }
+    
+    private Node deleteMax(Node x){
+        
+        Node aux = x.rightNode;
+    
+        if(aux.rightNode ==  null){
+            x.rightNode = null;
+        }else{
+            deleteMax(x.rightNode);
+        }
+        
+        return x;
+    }
+    
     public Object get(int key){
         //regresa el objeto asociado a una key
         //en caso de no encontrar nada lanza una excepcion
@@ -127,8 +161,16 @@ public class BinaryTree {
         
         test.inOrder();
         
-        aux = test.get(10);
-        System.out.println("objecto: "+(String)aux);
+        test.deleteMin();
+        
+        test.inOrder();
+        
+        test.deleteMax();
+        
+        test.inOrder();
+        
+        //aux = test.get(10);
+        //System.out.println("objecto: "+(String)aux);
     }
     
 }
